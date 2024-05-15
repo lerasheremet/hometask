@@ -1,8 +1,28 @@
-{$content}
+<div class="w3-panel w3-pale-red w3-leftbar w3-border-pink">
+    {$content}
+</div>
 
-<br>
+<table class="w3-table-all">
+    <tr class="w3-pink">
+        <th>ID</th>
+        <th>Жанр</th>
+        <th>Назва фільму</th>
+        <th>Рейтинг</th>
+        <th>Дія</th>
+    </tr>
+    {foreach $data as $movies}
+        <tr class="w3-hover-light-grey">
+            <td>{$movies['id']}</td>
+            <td>{$movies['genre']}</td>
+            <td>{$movies['name'] ?? '0'}</td>
+            <td>{$movies['rating']}</td>
+            <td>
+                <a href="/home/delete?id={$movies['id']}" class="w3-button w3-red">Видалити</a>
+            </td>
+        </tr>
+    {/foreach}
+</table>
 
-{foreach $data as $student}
-    {$student}<br>
-{/foreach}
-
+<div class="w3-container w3-pale-red w3-padding-16 w3-margin-top">
+    {include '../form.latte'}
+</div>

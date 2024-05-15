@@ -1,5 +1,10 @@
 <?php
+
+    session_start();
+
     require __DIR__ . '/../vendor/autoload.php';
+
+    $db = new \Lera\Newgit\Database();
 
     $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
@@ -13,6 +18,9 @@
         $r->addRoute('GET', '/about', [$aboutController, 'index']);
         $r->addRoute('GET', '/contacts', [$contactsController, 'index']);
         $r->addRoute('GET', '/catalogue', [$catalogueController, 'index']);
+
+        $r->addRoute('POST', '/',[$homeController, 'handleForm']);
+        $r->addRoute('GET', '/home/delete', [$homeController, 'handleFormDelete']);
     });
 
     // Fetch method and URI from somewhere
