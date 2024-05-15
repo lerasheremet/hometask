@@ -1,0 +1,22 @@
+{
+    "name": "lera/newgit",
+    "autoload": {
+        "psr-4": {
+            "Lera\\Newgit\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Valerie",
+            "email": "lerasherm@gmail.com"
+        }
+    ],
+    "require": {
+        "nikic/fast-route": "^1.3",
+        "nette/utils": "^4.0",
+        "latte/latte": "^3.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10"
+    }
+}
