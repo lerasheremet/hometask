@@ -11,4 +11,14 @@
     <a href="/catalogue" class="w3-bar-item">
         CATALOGUE
     </a>
+
+    {if $isUserLoggedIn}
+        <a href="/logout" class="w3-bar-item w3-right">
+            LOGOUT
+        </a>
+    {else}
+        <a href="/login" class="w3-bar-item w3-right">
+            LOGIN
+        </a>
+    {/if}
 </nav>

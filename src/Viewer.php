@@ -16,7 +16,12 @@ class Viewer
     {
         $latte = new Latte\Engine;
         $latte->setTempDirectory(__DIR__ . '/../views/cache');
+
+        $isUserLoggedIn = !empty($_SESSION['login']) && $_SESSION['login'] === 'Test';
+
         $params = $this->data;
+        $params['isUserLoggedIn'] = $isUserLoggedIn;
+
         $latte->render(__DIR__ . '/../views/index.latte', $params);
     }
 }

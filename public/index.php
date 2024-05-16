@@ -13,11 +13,27 @@
         $contactsController = new Lera\Newgit\Controllers\ContactsController();
         $catalogueController = new Lera\Newgit\Controllers\CatalogueController();
 
+        $loginController = new Lera\Newgit\Controllers\LoginController();
+
+        $authMiddleware = new \Lera\Newgit\AuthMiddleware();
+
+
         $r->addRoute('GET', '/', [$homeController, 'index']);
         $r->addRoute('GET', '/home', [$homeController, 'index']);
         $r->addRoute('GET', '/about', [$aboutController, 'index']);
-        $r->addRoute('GET', '/contacts', [$contactsController, 'index']);
         $r->addRoute('GET', '/catalogue', [$catalogueController, 'index']);
+
+        $r->addRoute('GET', '/login', [$loginController, 'index']);
+        $r->addRoute('POST', '/login', [$loginController, 'auth']);
+
+        $r->addRoute('GET', '/logout', function ($vars) {
+            session_destroy();
+            header('Location: /login');
+        });
+
+        $r->addRoute('GET', '/contacts', function ($vars) use ($authMiddleware, $contactsController) {
+            return $authMiddleware->handle([$contactsController, 'index'], $vars);
+        });
 
         $r->addRoute('POST', '/',[$homeController, 'handleForm']);
         $r->addRoute('GET', '/home/delete', [$homeController, 'handleFormDelete']);
